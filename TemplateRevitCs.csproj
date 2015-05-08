@@ -75,7 +75,40 @@
     <StartAction>Program</StartAction>
     <StartProgram>$(ProgramW6432)\Autodesk\Revit 2015\Revit.exe</StartProgram>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug2016|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;VERSION2016</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit 2016\Revit.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release2016|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;VERSION2016</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <StartAction>Program</StartAction>
+    <StartProgram>$(ProgramW6432)\Autodesk\Revit 2016\Revit.exe</StartProgram>
+  </PropertyGroup>
   <Choose>
+	<When Condition="'$(Configuration)' == 'Release2016' or '$(Configuration)' == 'Debug2016'">
+      <ItemGroup>
+        <Reference Include="RevitAPI">
+          <HintPath>$(ProgramW6432)\Autodesk\Revit 2016\RevitAPI.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="RevitAPIUI">
+          <HintPath>$(ProgramW6432)\Autodesk\Revit 2016\RevitAPIUI.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+      </ItemGroup>
+    </When>
     <When Condition="'$(Configuration)' == 'Release2015' or '$(Configuration)' == 'Debug2015'">
       <ItemGroup>
         <Reference Include="RevitAPI">
@@ -130,13 +163,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$projectname$.2013.addin">
+    <None Include="$projectname$-2013.addin">
       <SubType>Designer</SubType>
     </None>
-    <None Include="$projectname$.2014.addin">
+    <None Include="$projectname$-2014.addin">
       <SubType>Designer</SubType>
     </None>
-	<None Include="$projectname$.2015.addin">
+	<None Include="$projectname$-2015.addin">
+      <SubType>Designer</SubType>
+    </None>
+	<None Include="$projectname$-2016.addin">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -146,16 +182,20 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent Condition="'$(Configuration)' == 'Release' or '$(Configuration)' == 'Debug'">
-    copy "$(ProjectDir)$projectname$.2013.addin" "$(AppData)\Autodesk\Revit\Addins\2013\$projectname$.addin"
+    copy "$(ProjectDir)$projectname$-2013.addin" "$(AppData)\Autodesk\Revit\Addins\2013\$projectname$.addin"
     copy "$(TargetDir)\$projectname$.dll" "$(AppData)\Autodesk\Revit\Addins\2013"
     </PostBuildEvent>
     <PostBuildEvent Condition="'$(Configuration)' == 'Release2014' or '$(Configuration)' == 'Debug2014'">
-    copy "$(ProjectDir)$projectname$.2014.addin" "$(AppData)\Autodesk\Revit\Addins\2014\$projectname$.addin"
+    copy "$(ProjectDir)$projectname$-2014.addin" "$(AppData)\Autodesk\Revit\Addins\2014\$projectname$.addin"
     copy "$(TargetDir)\$projectname$.dll" "$(AppData)\Autodesk\Revit\Addins\2014\"
     </PostBuildEvent>
 	<PostBuildEvent Condition="'$(Configuration)' == 'Release2015' or '$(Configuration)' == 'Debug2015'">
-    copy "$(ProjectDir)$projectname$.2015.addin" "$(AppData)\Autodesk\Revit\Addins\2015\$projectname$.addin"
+    copy "$(ProjectDir)$projectname$-2015.addin" "$(AppData)\Autodesk\Revit\Addins\2015\$projectname$.addin"
     copy "$(TargetDir)\$projectname$.dll" "$(AppData)\Autodesk\Revit\Addins\2015\"
+    </PostBuildEvent>
+	<PostBuildEvent Condition="'$(Configuration)' == 'Release2016' or '$(Configuration)' == 'Debug2016'">
+    copy "$(ProjectDir)$projectname$-2016.addin" "$(AppData)\Autodesk\Revit\Addins\2016\$projectname$.addin"
+    copy "$(TargetDir)\$projectname$.dll" "$(AppData)\Autodesk\Revit\Addins\2016\"
     </PostBuildEvent>
   </PropertyGroup>
   <Target Name="AfterClean">
@@ -165,6 +205,8 @@
 	<Delete Files="$(AppData)\Autodesk\Revit\Addins\2014\$projectname$.dll" />
 	<Delete Files="$(AppData)\Autodesk\Revit\Addins\2015\$projectname$.addin" />
 	<Delete Files="$(AppData)\Autodesk\Revit\Addins\2015\$projectname$.dll" />
+	<Delete Files="$(AppData)\Autodesk\Revit\Addins\2016\$projectname$.addin" />
+	<Delete Files="$(AppData)\Autodesk\Revit\Addins\2016\$projectname$.dll" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

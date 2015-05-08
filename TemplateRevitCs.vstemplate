@@ -1,7 +1,7 @@
 <VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
   <TemplateData>
-    <Name>Revit Addin App(2013-2015)</Name>
-    <Description>App template for a Revit 2013,2014 and 2015 add-in project</Description>
+    <Name>Revit Addin App(2013-2016)</Name>
+    <Description>App template for a Revit 2013, 2014, 2015 and 2016 add-in project</Description>
 	<Icon>TemplateIcon.ico</Icon>
     <ProjectType>CSharp</ProjectType>
     <CreateNewFolder>true</CreateNewFolder>
@@ -12,15 +12,16 @@
   </TemplateData>
   <TemplateContent>
     <Project ReplaceParameters="true" File="TemplateRevitCS.csproj">
-      <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.2013.addin">RegisterAddin1.addin</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.2014.addin">RegisterAddin2.addin</ProjectItem>
-	  <ProjectItem ReplaceParameters="true" TargetFileName="$projectname$.2015.addin">RegisterAddin3.addin</ProjectItem>
-	  <ProjectItem ReplaceParameters="true">App.cs</ProjectItem>
-      <ProjectItem ReplaceParameters="true">Command.cs</ProjectItem>
-      <Folder Name="Properties" TargetFolderName="Properties">
+		<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$-2013.addin">RegisterAddin1.addin</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$-2014.addin">RegisterAddin2.addin</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$-2015.addin">RegisterAddin3.addin</ProjectItem>
+		<ProjectItem ReplaceParameters="true" TargetFileName="$projectname$-2016.addin">RegisterAddin4.addin</ProjectItem>
+		<ProjectItem ReplaceParameters="true">App.cs</ProjectItem>
+		<ProjectItem ReplaceParameters="true">Command.cs</ProjectItem>
+		<Folder Name="Properties" TargetFolderName="Properties">
         <ProjectItem ReplaceParameters="true">AssemblyInfo.cs</ProjectItem>
-      </Folder>
-	  <Folder Name="Lib" TargetFolderName="Lib"></Folder>
-    </Project>
+		</Folder>
+			<Folder Name="Lib" TargetFolderName="Lib"></Folder>
+		</Project>
   </TemplateContent>
 </VSTemplate>
